@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tasks</title>
+</head>
+<body>
+<h1>Hi, User!</h1>
+<hr>
+{% for task in tasks %}
+<p>Title: {{task.title}} - <b>Body: {{task.body}}</b> - Creation: {{task.creation}}</p></div>
+{% endfor %}
+</body>
+</html>
