@@ -29,10 +29,9 @@ class Account(Document):
             user.first_name = kwargs['first_name']
             user.second_nane = kwargs['second_name']
             self.update_avatar(self, user, kwargs['avatar'])
-
-
-        user = super(Account, self).save()
-        return user
+            return {"status": "Created", "details": "User with e-mail: %s was created" % email}
+        # user = super(Account, self).save()
+        # return user
 
     def create_super_user(self):
         user = self.create_user()
@@ -41,11 +40,11 @@ class Account(Document):
         user.save()
         return user
 
-    def update_avatar(self, user=None, avatar):
+    def update_avatar(self, user=None):     # avatar
         if user is not None:
 
             file = open("avatar_%s" % self.email, 'wb')
-            file.write(avatar)
+            file.write()    # avatar
             self.avatar.save(file)
             file.close()
             user = super(Account, self).save()
