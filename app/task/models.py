@@ -5,20 +5,25 @@ from mongoengine.fields import StringField, BooleanField, DateTimeField, Referen
 from app.accounts.models import Account
 
 
-class Task(Document):
-    owner = ReferenceField(Account)
-    title = StringField(min_length=1, max_length=250, required=True)
-    body = StringField(max_length=500, blank=True, null=True)
-    creation = DateTimeField(default=datetime.utcnow())
-    finished = BooleanField(default=False)
+class CategoryTask(Document):
+    owner = ReferenceField(Account, reverse_delete_rule=mongoengine.CASCADE)
+    title = StringField(min_length=1, max_length=50, required=True)
 
     def __str__(self):
         return self.title
 
-    # def crete_task(self, **kwargs):
-    #     new_task = Task.objects(title=kwargs['title'],
-    #                             body=kwargs['body'],
-    #                             creation=kwargs['creation'],
-    #                             finished=kwargs['finished'])
-    #     new_task.save()
-    #     return new_task
+
+class Task(Document):
+    owner = ReferenceField(Account, reverse_delete_rule=mongoengine.CASCADE)
+    title = StringField(min_length=1, max_length=250, required=True)
+    category = ReferenceField(CategoryTask)
+    body = StringField(max_length=500, blank=True, null=True)
+    creation = DateTimeField(default=datetime.utcnow())
+    start_date = DateTimeField(default=datetime.utcnow())
+    finish_date = DateTimeField(default=datetime.utcnow())
+    finished = BooleanField(default=False)
+    reminder = BooleanField(default=False)
+    reminder_date = DateTimeField(default=datetime.utcnow())
+
+    def __str__(self):
+        return self.title
