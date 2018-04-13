@@ -35,5 +35,10 @@ class ContactView(MethodView):
         except Exception as e:
             return jsonify({"status": "Error", "detail": e})
 
-    def put(self, name):
-        pass
+    def patch(self, name):
+        try:
+            data = request.json
+            Contact.objects(name=name).update(**data)
+            return jsonify({"status": "Updated", "detail": "Your contact was updated"})
+        except Exception as e:
+            return jsonify({"status": "Error", "detail": e})

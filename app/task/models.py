@@ -6,7 +6,7 @@ from app.accounts.models import Account
 
 
 class CategoryTask(Document):
-    owner = ReferenceField(Account, reverse_delete_rule=mongoengine.CASCADE)
+    # owner = ReferenceField(Account, reverse_delete_rule=mongoengine.CASCADE)
     title = StringField(min_length=1, max_length=50, required=True)
 
     def __str__(self):
@@ -14,7 +14,7 @@ class CategoryTask(Document):
 
 
 class Task(Document):
-    owner = ReferenceField(Account, reverse_delete_rule=mongoengine.CASCADE)
+    # owner = ReferenceField(Account, reverse_delete_rule=mongoengine.CASCADE)
     title = StringField(min_length=1, max_length=250, required=True)
     category = ReferenceField(CategoryTask)
     body = StringField(max_length=500, blank=True, null=True)

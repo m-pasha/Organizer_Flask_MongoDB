@@ -6,7 +6,7 @@ from app.accounts.models import Account
 
 
 class CategoryBudget(Document):
-    owner = ReferenceField(Account, reverse_delete_rule=mongoengine.CASCADE)
+    # owner = ReferenceField(Account, reverse_delete_rule=mongoengine.CASCADE)
     title = StringField(min_length=1, max_length=50, required=True)
 
     def __str__(self):
@@ -14,7 +14,7 @@ class CategoryBudget(Document):
 
 
 class Currency(Document):
-    owner = ReferenceField(Account, reverse_delete_rule=mongoengine.CASCADE)
+    # owner = ReferenceField(Account, reverse_delete_rule=mongoengine.CASCADE)
     short_name = StringField(min_length=1, max_length=5, required=True)
     name = StringField(min_length=1, max_length=50)
 
@@ -23,7 +23,8 @@ class Currency(Document):
 
 
 class BudgetAccount(Document):
-    owner = ReferenceField(Account, reverse_delete_rule=mongoengine.CASCADE)
+    # id = IntField(primary_key=True)
+    # owner = ReferenceField(Account, reverse_delete_rule=mongoengine.CASCADE)
     currency = ReferenceField(Currency, reverse_delete_rule=mongoengine.CASCADE)
     name = StringField(min_length=1, max_length=100)
     short_name = StringField(min_length=1, max_length=50)
@@ -35,7 +36,8 @@ class BudgetAccount(Document):
 
 
 class Invoice(Document):
-    owner = ReferenceField(Account, reverse_delete_rule=mongoengine.CASCADE)
+    id = IntField(primary_key=True)
+    # owner = ReferenceField(Account, reverse_delete_rule=mongoengine.CASCADE)
     budget_account = ReferenceField(BudgetAccount, reverse_delete_rule=mongoengine.CASCADE)
     currency = ReferenceField(Currency, reverse_delete_rule=mongoengine.CASCADE)
     category = ReferenceField(CategoryBudget)       # TODO: on_delete

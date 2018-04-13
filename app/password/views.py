@@ -35,5 +35,10 @@ class PasswordView(MethodView):
         except Exception as e:
             return jsonify({"status": "Error", "detail": e})
 
-    def put(self, resource_url):
-        pass
+    def patch(self, resource_url):
+        try:
+            data = request.json
+            Password.objects(resource_url=resource_url).update(**data)
+            return jsonify({"status": "Updated", "detail": "Your password was updated"})
+        except Exception as e:
+            return jsonify({"status": "Error", "detail": e})

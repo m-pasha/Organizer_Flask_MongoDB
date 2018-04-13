@@ -5,7 +5,7 @@ from app.accounts.models import Account
 
 
 class Password(Document):
-    owner = ReferenceField(Account, reverse_delete_rule=mongoengine.CASCADE)
+    # owner = ReferenceField(Account, reverse_delete_rule=mongoengine.CASCADE)
     resource_url = StringField(min_length=1, max_length=100)
     password_res = StringField(min_length=1, max_length=100)
     

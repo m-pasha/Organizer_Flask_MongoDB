@@ -35,8 +35,13 @@ class TaskView(MethodView):
         except Exception as e:
             return jsonify({"status": "Error", "detail": e})
 
-    def put(self, title):
-        pass
+    def patch(self, title):
+        try:
+            data = request.json
+            Task.objects(title=title).update(**data)
+            return jsonify({"status": "Updated", "detail": "Your task was updated"})
+        except Exception as e:
+            return jsonify({"status": "Error", "detail": e})
 
 
 class CategoryTaskView(MethodView):
@@ -69,5 +74,10 @@ class CategoryTaskView(MethodView):
         except Exception as e:
             return jsonify({"status": "Error", "detail": e})
 
-    def put(self, title):
-        pass
+    def patch(self, title):
+        try:
+            data = request.json
+            CategoryTask.objects(title=title).update(**data)
+            return jsonify({"status": "Updated", "detail": "Your category was updated"})
+        except Exception as e:
+            return jsonify({"status": "Error", "detail": e})

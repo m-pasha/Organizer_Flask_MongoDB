@@ -35,5 +35,10 @@ class DiaryView(MethodView):
         except Exception as e:
             return jsonify({"status": "Error", "detail": e})
 
-    def put(self, title):
-        pass
+    def patch(self, title):
+        try:
+            data = request.json
+            Diary.objects(title=title).update(**data)
+            return jsonify({"status": "Updated", "detail": "Your diary was updated"})
+        except Exception as e:
+            return jsonify({"status": "Error", "detail": e})

@@ -5,7 +5,7 @@ from app.accounts.models import Account
 
 
 class Contact(Document):
-    owner = ReferenceField(Account, reverse_delete_rule=mongoengine.CASCADE)
+    # owner = ReferenceField(Account, reverse_delete_rule=mongoengine.CASCADE)
     name = StringField(min_length=1, max_length=50, required=True)
     surname = StringField(min_length=1, max_length=50)
     phone = StringField(max_length=50)
